@@ -49,18 +49,18 @@ int main()
     //1. Przeprowadziæ interpolacjê danych z krokiem h - 0.025
     double h = 0.025;
 
-    //tu mo¿na na kilka sposobów, zobaczymy
+   
     //sprawdzamy, ile bêdzie potrzebne kroków
     //pobranie danych z pliku
-    int ilekroków =(int)(danex[4] - danex[0])/h; //ofc elementy tablicy liczy siê od 0; dzielimy szerokoœæ dziedziny na krok i mamy ile kroków musimy przejœc
-
+    double ilekroków =(int)(danex[4] - danex[0])/h; //ofc elementy tablicy liczy siê od 0; dzielimy szerokoœæ dziedziny na krok i mamy ile kroków musimy przejœc
     double* interpolowanex = (double *)malloc(ilekroków*sizeof(double));
     double* interpolowaney = (double *)malloc(ilekroków*sizeof(double));
+    //tu mo¿na na kilka sposobów, zobaczymy
     int pom = 0;
-    for (double i = danex[0]; i <= ilekroków; i += h) //zaczynamy od pierwszego elementu z tablicy i lecimy do ostatniego co krok interpolowania
+    for (double i = danex[0]; i <= danex[N]; i += h) //zaczynamy od pierwszego elementu z tablicy i lecimy do ostatniego co krok interpolowania
     {
         interpolowanex[pom] = i;
-        interpolowaney[pom] = lagrange(danex, daney, 5, i); //interpoluje wartoœæ y(i) na podstawie wartoœci wprowadzeonej na pocz¹tku
+        interpolowaney[pom] = lagrange(danex, daney, 5, i); //interpoluje wartoœæ y(i) na podstawie wartoœci wprowadzeonej na pocz¹tku    //   printf("%.5f\n", interpolowaney[pom]);
         pom++;
     }
     //2. zapisaæ do pliku, dwie kolumny
@@ -83,6 +83,7 @@ int main()
     mz = bisec(danex[0], danex[4], funkcjazinterpolowana, epsilon, &iter); //wartoœci funkcji na poczatku sa -, potem + _ musi byc miejsce zerowe pomiedzy. skorzystamy z bisekcji
     printf("\nMiejscezerowe = %.4f, liczba iteracji bisekcji = %d", mz, iter);
 
+    //co do wykresu - wêz³y interpolacji np. mozna x-ami zaznaczyæ, wykres z interpolowanego ma³ymi kropkami
     free(interpolowanex);
     free(interpolowaney);
     free(danex);
