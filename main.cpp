@@ -71,7 +71,7 @@ int main()
 
     for (int i = 0; i < ilekroków;i++)
     {
-        fprintf(f,"%.5f\t%.5f\n", interpolowanex[i], interpolowaney[i]); //drukowanie do pliku po tabulatorku. .5f to 5 miejsc po przecinku
+        fprintf_s(f,"%.5f\t%.5f\n", interpolowanex[i], interpolowaney[i]); //drukowanie do pliku po tabulatorku. .5f to 5 miejsc po przecinku
     }
     fclose(f);
     //3. Wyznaczyæ wartoœæ ca³ki oznaczonej z przedzia³u od O do 3 dla funkcji wygenerowanej w punkcie 2 (z krokiem h = O.025), wynik dzia³ania wyœwietl na ekranie
@@ -81,14 +81,27 @@ int main()
     int iter = 0;
     double epsilon = 0.0001;
     double mz = 0; //na miejsce zerowe
-     //   
     mz = bisec(danex[0], danex[4], funkcjazinterpolowana, epsilon, &iter); //wartoœci funkcji na poczatku sa -, potem + _ musi byc miejsce zerowe pomiedzy. skorzystamy z bisekcji
     printf("\nMiejsce zerowe = %.4f, liczba iteracji bisekcji = %d", mz, iter);
 
     //co do wykresu - wêz³y interpolacji np. mozna x-ami zaznaczyæ, wykres z interpolowanego ma³ymi kropkami
+    graphics(1500, 960);
+    scale(danex[0]-2, daney[0]-2, danex[N - 1]+1, daney[N - 1]+2);//skala, tak ¿by siê zmieœci³o mo¿e byæ i wiêksza - dodalem 2 zeby bylo widac
+    for (int i = 0; i < N; i++)
+    {
+        circle(danex[i], daney[i], 5);
+    }
+    for (int i = 0; i < ilekroków; i++)
+    {
+        point(interpolowanex[i], interpolowaney[i]);
+
+       // print("%lf,%lf",danex[i])
+    }
+
     free(interpolowanex);
     free(interpolowaney);
     free(danex);
     free(daney);
+    wait();
     return 0;
 }
