@@ -39,8 +39,5 @@ int main()
 		printf("Dla k = %d, miejsce zerowe to: %lf, liczba iteracji: %d\n", i, miejsce_zerowe, iter);
 	}
 
-	
-
-
 	return 0;
 }
