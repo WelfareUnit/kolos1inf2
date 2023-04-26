@@ -5,38 +5,31 @@
 #include <conio.h>
 #include "kwad.h"
 #include "nonlin.h"
-double k = 1;
 
-double funkcjawew(double x) //funkcja podca³kowa
+double funkcjapoczatkowa(double x) //losowa funkcja z dupy
 {
-	return cos(k * 3.14159265359* x );
-}
-
-double funkcjaodalfa(double alfa) //funkcja liczaca calke
-{
-	return trapez(0, alfa, funkcjawew, 2000); //2000 z dupy wziete zeby bylo dokladnie
+	return sin(cos(x*x));
 }
 
 int main()
 {
-	int alfa = 1;
 	int N = 0;
-	int epsilon = 0.0001;
-	do   //¿eby na pewno dobrze wpisali
+	double wartosc = 0;
+	while ((int)N > 50 || (int)N < 2)   //zeby na pewno dobrze wpisali
 	{
-		printf("Podaj liczbe calkowita N, z przedzialu (1,200>: \n");
+		printf("Podaj liczbe calkowita N, z przedzialu (1,50>: \n");
 		scanf("%d", &N);
 		system("CLS"); //czyszczenie ekranu
 		printf("Niepoprawne dane\n");
-		N = -1;
-	} while ((int)N > 200 || (int)N < 2);
-	int iter = 0;
-	double miejsce_zerowe = 0;
+	} 
+	double *tabx = (double*)malloc(N * sizeof(double));	//tablice na wartosci zinterpolowane
+	double *taby = (double*)malloc(N * sizeof(double));
 	for (int i = 1; i <= N; i++)
 	{
-		k = i;
-		miejsce_zerowe = bisec(0, k, funkcjaodalfa,epsilon,&iter);
-		printf("Dla k = %d, miejsce zerowe to: %lf, liczba iteracji: %d\n", i, miejsce_zerowe, iter);
+		wartosc = trapez(0, i, funkcjapoczatkowa, 200);
+		printf("Wartosc calki z funkcji od 0 do %d: %d\n", i, wartosc);
+		tabx[i - 1] = i;
+		taby[i - 1] = wartosc;
 	}
 
 	return 0;

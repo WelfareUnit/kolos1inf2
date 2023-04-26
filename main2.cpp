@@ -7,7 +7,7 @@
 #include "nonlin.h"
 double k = 1;
 
-double funkcjawew(double x) //funkcja podca³kowa
+double funkcjawew(double x) //funkcja podcaï¿½kowa
 {
 	return cos(k * 3.14159265359* x );
 }
@@ -22,13 +22,12 @@ int main()
 	int alfa = 1;
 	int N = 0;
 	int epsilon = 0.0001;
-	do   //¿eby na pewno dobrze wpisali
+	do   //ï¿½eby na pewno dobrze wpisali
 	{
 		printf("Podaj liczbe calkowita N, z przedzialu (1,200>: \n");
 		scanf("%d", &N);
 		system("CLS"); //czyszczenie ekranu
 		printf("Niepoprawne dane\n");
-		N = -1;
 	} while ((int)N > 200 || (int)N < 2);
 	int iter = 0;
 	double miejsce_zerowe = 0;
