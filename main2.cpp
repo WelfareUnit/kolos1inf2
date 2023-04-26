@@ -14,7 +14,7 @@ double funkcjawew(double x)
 
 double funkcjaodalfa(double alfa)
 {
-	return trapez(0, alfa, funkcjawew, 2000); //2000 z dupy wziete zeby bylo dokladnie
+	return trapez(0, alfa, funkcjawew, 200); //2000 z dupy wziete zeby bylo dokladnie
 }
 
 int main()
@@ -22,7 +22,7 @@ int main()
 	int alfa = 1;
 	int N = 0;
 	int epsilon = 0.0001;
-	while (N > 200 || N < 2)    //¿eby na pewno dobrze wpisali
+	while ((int)N > 200 || (int)N < 2)    //¿eby na pewno dobrze wpisali
 	{
 		printf("Podaj liczbe calkowita N, z przedzialu (1,200>: \n");
 		scanf("%d", &N);
