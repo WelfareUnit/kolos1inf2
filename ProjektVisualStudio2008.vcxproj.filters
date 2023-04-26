@@ -21,10 +21,40 @@
     <ClCompile Include="winbgi2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="nonlin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rk4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gauss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kwad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="winbgi2.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kwad.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nonlin.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rk4.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gauss.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inter.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

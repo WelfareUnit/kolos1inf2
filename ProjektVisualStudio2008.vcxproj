@@ -89,10 +89,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gauss.cpp" />
+    <ClCompile Include="inter.cpp" />
+    <ClCompile Include="kwad.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="nonlin.cpp" />
+    <ClCompile Include="rk4.cpp" />
     <ClCompile Include="winbgi2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gauss.h" />
+    <ClInclude Include="inter.h" />
+    <ClInclude Include="kwad.h" />
+    <ClInclude Include="nonlin.h" />
+    <ClInclude Include="rk4.h" />
     <ClInclude Include="winbgi2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
