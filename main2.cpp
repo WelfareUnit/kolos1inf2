@@ -9,7 +9,7 @@ double k = 1;
 
 double funkcjawew(double x)
 {
-	return cos(k * 3.14159265359*x);
+	return cos(k * 3.14159265359* x );
 }
 
 double funkcjaodalfa(double alfa)
@@ -37,16 +37,6 @@ int main()
 	}
 
 	
-
-
-
-
-
-
-
-
-
-
 
 
 	return 0;
