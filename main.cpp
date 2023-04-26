@@ -25,20 +25,15 @@ void danezpliku()
         printf("Blad otwarcia pliku!\n");  // drukujemy komunikat o bledzie
         exit(1);
     }
-
+    fscanf(plik, "%d", &N);
     daney = (double*)malloc(N * sizeof(double));
     danex = (double*)malloc(N * sizeof(double));
-    fscanf(plik, "%d", &N);
     for (int i = 0; i < N; i++)
     {
         fscanf(plik, "%lf\t%lf", &danex[i], &daney[i]);
 
     }
-    for (int i = 0; i < N; i++)
-    {
-        printf("%.5f\t%.5f\n", danex[i], daney[i]); //drukowanie do pliku po tabulatorku. .5f to 5 miejsc po przecinku
-    }
-    //zak³adam, ¿e na pocz¹tku pliku podana jest liczba punktów
+        
     fclose(plik);
 }
 
@@ -67,26 +62,26 @@ int main()
         interpolowanex[pom] = i;
         interpolowaney[pom] = lagrange(danex, daney, 5, i); //interpoluje wartoœæ y(i) na podstawie wartoœci wprowadzeonej na pocz¹tku
         pom++;
-        printf("%d", pom);
     }
     //2. zapisaæ do pliku, dwie kolumny
     FILE* f;
     f = fopen("interpol.txt", "w");
     fprintf(f, "x\ty\n"); //nag³ówek pliku
 
-    for (int i = 0; i < ilekroków;i++)
+    for (int i = 0; i <= ilekroków;i++)
     {
         fprintf(f,"%.5f\t%.5f\n", interpolowanex[i], interpolowaney[i]); //drukowanie do pliku po tabulatorku. .5f to 5 miejsc po przecinku
     }
     fclose(f);
     //3. Wyznaczyæ wartoœæ ca³ki oznaczonej z przedzia³u od O do 3 dla funkcji wygenerowanej w punkcie 2 (z krokiem h = O.025), wynik dzia³ania wyœwietl na ekranie
-    double wartcalki = trapez(danex[0], danex[4], funkcjazinterpolowana, ilekroków);
+    //double wartcalki = trapez(danex[0], danex[4], funkcjazinterpolowana, ilekroków);
     //4. Wyznaczyæ miejsce zerowe funkcji przybli¿onej danymi z dok³adnoœci¹ do 10 ^- 4, iloœæ iteracji wyœwietl na ekranie(4 pkt)
     int iter = 0;
     double epsilon = 0.0001;
     double mz = 0; //na miejsce zerowe
- //   mz = bisec(danex[0], danex[4], funkcjazinterpolowana, epsilon, &iter); //wartoœci funkcji na poczatku sa -, potem + _ musi byc miejsce zerowe pomiedzy. skorzystamy z bisekcji
- //   printf("\nMiejscezerowe = %.4f, liczba iteracji bisekcji = %d", mz, iter);
+     //   
+    mz = bisec(danex[0], danex[4], funkcjazinterpolowana, epsilon, &iter); //wartoœci funkcji na poczatku sa -, potem + _ musi byc miejsce zerowe pomiedzy. skorzystamy z bisekcji
+    printf("\nMiejscezerowe = %.4f, liczba iteracji bisekcji = %d", mz, iter);
 
     free(interpolowanex);
     free(interpolowaney);
