@@ -14,7 +14,7 @@ double funkcjawew(double x)
 
 double funkcjaodalfa(double alfa)
 {
-	return trapez(0, alfa, funkcjawew, 200); //2000 z dupy wziete zeby bylo dokladnie
+	return trapez(0, alfa, funkcjawew, 2000); //2000 z dupy wziete zeby bylo dokladnie
 }
 
 int main()
