@@ -76,7 +76,7 @@ int main()
     //3. Wyznaczyæ wartoœæ ca³ki oznaczonej z przedzia³u od O do 3 dla funkcji wygenerowanej w punkcie 2 (z krokiem h = O.025), wynik dzia³ania wyœwietl na ekranie
     double wartcalki = trapez(danex[0], danex[N-1], funkcjazinterpolowana, ilekroków);
     printf("Wartoœæ ca³ki to %.5f\n", wartcalki);
-    //4. Wyznaczyæ miejsce zerowe funkcji przybli¿onej danymi z dok³adnoœci¹ do 10 ^- 4, iloœæ iteracji wyœwietl na ekranie(4 pkt)
+    //4. Wyznaczyæ miejsce zerowe funkcji przybli¿onej danymi z dok³adnoœci¹ do 10 ^- 4, iloœæ iteracji wyœwietl na ekranie
     int iter = 0;
     double epsilon = 0.0001;
     double mz = 0; //na miejsce zerowe
