@@ -25,6 +25,7 @@ void danezpliku()
         printf("Blad otwarcia pliku!\n");  // drukujemy komunikat o bledzie
         exit(1);
     }
+
     daney = (double*)malloc(N * sizeof(double));
     danex = (double*)malloc(N * sizeof(double));
     fscanf(plik, "%d", &N);
@@ -33,7 +34,10 @@ void danezpliku()
         fscanf(plik, "%lf\t%lf", &danex[i], &daney[i]);
 
     }
-
+    for (int i = 0; i < N; i++)
+    {
+        printf("%.5f\t%.5f\n", danex[i], daney[i]); //drukowanie do pliku po tabulatorku. .5f to 5 miejsc po przecinku
+    }
     //zak³adam, ¿e na pocz¹tku pliku podana jest liczba punktów
     fclose(plik);
 }
@@ -44,9 +48,9 @@ double funkcjazinterpolowana(double x) //do 3.
 }
 int main()
 {
-    //mamy dane, wprowadŸmy je - talbice bêd¹ 5cioelementowe statyczne na pocz¹tku, bo tak¹ mamy tabelkê
+    
     danezpliku();
-
+    
     //1. Przeprowadziæ interpolacjê danych z krokiem h - 0.025
     double h = 0.025;
 
@@ -54,19 +58,22 @@ int main()
     //sprawdzamy, ile bêdzie potrzebne kroków
     //pobranie danych z pliku
     int ilekroków =(int)(danex[4] - danex[0])/h; //ofc elementy tablicy liczy siê od 0; dzielimy szerokoœæ dziedziny na krok i mamy ile kroków musimy przejœc
+
     double* interpolowanex = (double *)malloc(ilekroków*sizeof(double));
     double* interpolowaney = (double *)malloc(ilekroków*sizeof(double));
     int pom = 0;
-    for (double i = danex[0]; i <= danex[4]; i += h) //zaczynamy od pierwszego elementu z tablicy i lecimy do ostatniego co krok interpolowania
+    for (double i = danex[0]; i <= ilekroków; i += h) //zaczynamy od pierwszego elementu z tablicy i lecimy do ostatniego co krok interpolowania
     {
         interpolowanex[pom] = i;
         interpolowaney[pom] = lagrange(danex, daney, 5, i); //interpoluje wartoœæ y(i) na podstawie wartoœci wprowadzeonej na pocz¹tku
-        pom++
+        pom++;
+        printf("%d", pom);
     }
     //2. zapisaæ do pliku, dwie kolumny
     FILE* f;
     f = fopen("interpol.txt", "w");
     fprintf(f, "x\ty\n"); //nag³ówek pliku
+
     for (int i = 0; i < ilekroków;i++)
     {
         fprintf(f,"%.5f\t%.5f\n", interpolowanex[i], interpolowaney[i]); //drukowanie do pliku po tabulatorku. .5f to 5 miejsc po przecinku
@@ -78,8 +85,8 @@ int main()
     int iter = 0;
     double epsilon = 0.0001;
     double mz = 0; //na miejsce zerowe
-    mz = bisec(danex[0], danex[4], funkcjazinterpolowana, epsilon, &iter); //wartoœci funkcji na poczatku sa -, potem + _ musi byc miejsce zerowe pomiedzy. skorzystamy z bisekcji
-    printf("\nMiejscezerowe = %.4f, liczba iteracji bisekcji = %d", mz, iter);
+ //   mz = bisec(danex[0], danex[4], funkcjazinterpolowana, epsilon, &iter); //wartoœci funkcji na poczatku sa -, potem + _ musi byc miejsce zerowe pomiedzy. skorzystamy z bisekcji
+ //   printf("\nMiejscezerowe = %.4f, liczba iteracji bisekcji = %d", mz, iter);
 
     free(interpolowanex);
     free(interpolowaney);
