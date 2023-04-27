@@ -39,17 +39,19 @@ int main()
 	for (int i = 0; i <= b; i++) 
 	{
 		xfunkcji[i] = i+a;
-		yfunkcji[i] = funkcjapoczatkowa(i+a);
-		circle(xfunkcji[i], yfunkcji[i], 5);
+		yfunkcji[i] = funkcjapoczatkowa(i+a);	//obliczanie kilku elementow z funkjci - analogicznie jak w instrukcji 1
+		circle(xfunkcji[i], yfunkcji[i], 5);	
+		//rysowanie wezlow interpolacji, kolka zeby odroznic
 	}
 
 	int ileiteracji = 0;
-	double h = 0.0025;
-	for (double i = a; i <= b; i+=h)
+	double h = 0.0025; //krok dla funkcji zinterpolowanej
+	for (double i = a; i <= b; i+=h) //rysowanie funkcji zinterpolowanej - zaczynamy na poczatku zakresu i idziemy co krok
 	{
 		point(i, zinterpolowane(i));
 		printf("Wartosc interpolowana w punkcie %lf: %lf\n", i, zinterpolowane(i));
 	}
+	//mozna tez uzyc innych funkcji calkujacych
 	printf("Miejscem zerowym wielomianu lagrange funkcji jest :%.4f, iteracji bylo %d",bisec(a, b, zinterpolowane, 0.0001, &ileiteracji),ileiteracji);
 
 	free(tabx);
