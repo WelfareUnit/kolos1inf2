@@ -5,32 +5,57 @@
 #include <conio.h>
 #include "kwad.h"
 #include "nonlin.h"
-
+#include "inter.h"
+#include "winbgi2.h"
+int N = 6;
+double* xfunkcji = (double*)malloc(N * sizeof(double));
+double* yfunkcji = (double*)malloc(N * sizeof(double));
 double funkcjapoczatkowa(double x) //losowa funkcja z dupy
 {
-	return sin(cos(x*x));
+	return x+0.6;
+}
+double zinterpolowane(double x)
+{
+	return lagrange(xfunkcji, yfunkcji, 6, x);
 }
 
 int main()
 {
-	int N = 0;
+	graphics(800, 600);
 	double wartosc = 0;
-	while ((int)N > 50 || (int)N < 2)   //zeby na pewno dobrze wpisali
-	{
-		printf("Podaj liczbe calkowita N, z przedzialu (1,50>: \n");
-		scanf("%d", &N);
-		system("CLS"); //czyszczenie ekranu
-		printf("Niepoprawne dane\n");
-	} 
-	double *tabx = (double*)malloc(N * sizeof(double));	//tablice na wartosci zinterpolowane
+	double a = -2.0;
+	double b = a+N; //tak ¿eby mo¿na by³o zrobiæ N przedzia³ów
+	
+	double *tabx = (double*)malloc(N * sizeof(double));	//tablice na wartosci calek z przedzialow
 	double *taby = (double*)malloc(N * sizeof(double));
-	for (int i = 1; i <= N; i++)
+	for (int i = 1; i <= N; i++) // calkowanie na kilku przedzialach
 	{
-		wartosc = trapez(0, i, funkcjapoczatkowa, 200);
-		printf("Wartosc calki z funkcji od 0 do %d: %d\n", i, wartosc);
+		wartosc = trapez(0.0, i, funkcjapoczatkowa, 200);
+		printf("Wartosc calki z funkcji od 0 do %d: %lf\n", i, wartosc);
 		tabx[i - 1] = i;
 		taby[i - 1] = wartosc;
 	}
+	scale(-3, -3, 3, 3);
+	for (int i = 0; i <= b; i++) 
+	{
+		xfunkcji[i] = i+a;
+		yfunkcji[i] = funkcjapoczatkowa(i+a);
+		circle(xfunkcji[i], yfunkcji[i], 5);
+	}
 
+	int ileiteracji = 0;
+	double h = 0.0025;
+	for (double i = a; i <= b; i+=h)
+	{
+		point(i, zinterpolowane(i));
+		printf("Wartosc interpolowana w punkcie %lf: %lf\n", i, zinterpolowane(i));
+	}
+	printf("Miejscem zerowym wielomianu lagrange funkcji jest :%.4f, iteracji bylo %d",bisec(a, b, zinterpolowane, 0.0001, &ileiteracji),ileiteracji);
+
+	free(tabx);
+	free(taby);
+	free(xfunkcji);
+	free(yfunkcji);
+	wait();
 	return 0;
 }
